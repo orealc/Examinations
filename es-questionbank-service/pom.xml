@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.trkj</groupId>
-    <artifactId>es-user-service</artifactId>
+    <artifactId>es-questionbank-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>es-user-service</name>
+    <name>es-questionbank-service</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -56,6 +56,7 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.4</version>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -120,7 +121,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.7.RELEASE</version>
                 <configuration>
-                    <mainClass>com.trkj.esuserservice.EsUserServiceApplication</mainClass>
+                    <mainClass>com.trkj.esquestionbankservice.EsQuestionbankServiceApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

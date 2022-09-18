@@ -9,13 +9,19 @@
         <outputRelativeToContentRoot value="true" />
         <module name="es-gateway-service" />
         <module name="es-user-service" />
-        <module name="jwtservice" />
         <module name="publicservice" />
+        <module name="es-expaper-service" />
+        <module name="es-staff-service" />
+        <module name="jwtservice" />
+        <module name="es-questionbank-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="emt-" target="1.8" />
+      <module name="es-expaper-service" target="1.8" />
       <module name="es-gateway-service" target="1.8" />
+      <module name="es-questionbank-service" target="1.8" />
+      <module name="es-staff-service" target="1.8" />
       <module name="es-user-service" target="1.8" />
       <module name="jwtservice" target="1.8" />
       <module name="publicservice" target="1.5" />

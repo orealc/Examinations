@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Examinations.iml" filepath="$PROJECT_DIR$/.idea/Examinations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/es-expaper-service/es-expaper-service.iml" filepath="$PROJECT_DIR$/es-expaper-service/es-expaper-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/es-gateway-service/es-gateway-service.iml" filepath="$PROJECT_DIR$/es-gateway-service/es-gateway-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/es-questionbank-service/es-questionbank-service.iml" filepath="$PROJECT_DIR$/es-questionbank-service/es-questionbank-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/es-staff-service/es-staff-service.iml" filepath="$PROJECT_DIR$/es-staff-service/es-staff-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/es-user-service/es-user-service.iml" filepath="$PROJECT_DIR$/es-user-service/es-user-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/jwtservice/jwtservice.iml" filepath="$PROJECT_DIR$/jwtservice/jwtservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/publicservice/publicservice.iml" filepath="$PROJECT_DIR$/publicservice/publicservice.iml" />

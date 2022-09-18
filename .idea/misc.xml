@@ -11,8 +11,16 @@
         <option value="$PROJECT_DIR$/publicservice/pom.xml" />
         <option value="$PROJECT_DIR$/es-user-service/pom.xml" />
         <option value="$PROJECT_DIR$/es-gateway-service/pom.xml" />
+        <option value="$PROJECT_DIR$/es-staff-service/pom.xml" />
+        <option value="$PROJECT_DIR$/es-expaper-service/pom.xml" />
+        <option value="$PROJECT_DIR$/es-questionbank-service/pom.xml" />
       </list>
     </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/es-expaper-service/.gitignore" />
+    <file url="file://$PROJECT_DIR$/es-expaper-service/HELP.md" />
+    <file url="file://$PROJECT_DIR$/es-expaper-service/README.md" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_14" default="false" project-jdk-name="1.8 (2)" project-jdk-type="JavaSDK" />
 </project>
