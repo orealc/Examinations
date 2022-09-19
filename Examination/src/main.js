@@ -1,14 +1,14 @@
-import {
-    createApp
-} from 'vue'
-import App from './App.vue'
-import './assets/css/global.css'
-import ElementPlus from 'element-plus'
+import { createApp } from 'vue'
 import 'element-plus/dist/index.css'
+import App from './App.vue'
+import ElementPlus from 'element-plus'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import zhCn from 'element-plus/lib/locale/lang/zh-cn' //把默认的英文改成中文
+import * as ElIcons from '@element-plus/icons-vue'
 import router from './router'
-createApp(App).use(VueAxios, axios).use(router).use(ElementPlus, {
-    locale: zhCn,
-}).mount('#app')
+const app=createApp(App).use(ElementPlus).use(router).use(VueAxios, axios)
+// 统一注册el-icon图标
+for(let iconName in ElIcons){
+    app.component(iconName,ElIcons[iconName])
+}
+app.mount('#app')
