@@ -1,8 +1,8 @@
-package com.trkj.ltuserservice.vo;
+package com.trkj.esuserservice.vo;
 
 
 
-import com.trkj.ltuserservice.exception.CustomError;
+import com.trkj.esuserservice.exception.CustomError;
 import lombok.Data;
 
 /**

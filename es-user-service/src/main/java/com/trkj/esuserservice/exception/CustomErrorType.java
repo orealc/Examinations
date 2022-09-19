@@ -1,4 +1,4 @@
-package com.trkj.ltuserservice.exception;
+package com.trkj.esuserservice.exception;
 
 public enum CustomErrorType {
     USER_INPUT_ERROR(400,"参数异常"),

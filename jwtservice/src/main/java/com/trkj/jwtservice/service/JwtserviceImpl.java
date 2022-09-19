@@ -11,6 +11,11 @@ public class JwtserviceImpl implements Jwtservice {
     private JwtTokenUtil jwtTokenUtil;
 
     @Override
+    public Boolean validateToken(String token) {
+        return null;
+    }
+
+    @Override
     public String generateToken(String userName,String userId) {
         return jwtTokenUtil.generateToken(userName,userId);
     }
@@ -45,9 +50,6 @@ public class JwtserviceImpl implements Jwtservice {
 //        return refreshToken(token);
 //    }
 //
-    @Override
-    public Boolean validateToken(String token, String userName) {
-        return validateToken(token,userName);
-    }
+
 
 }

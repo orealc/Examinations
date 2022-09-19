@@ -131,17 +131,15 @@ const aaaa=[
         <!-- sortable排序 -->
         <el-table-column type="selection" width="55" />
         <el-table-column type="index" label="序号" />
-        <el-table-column prop="name" label="试卷名称" width="180">
+        <el-table-column prop="name" label="考试名称" width="180">
           <template #default=scope v-slot="scope">
             <span style="color: #00aaff">{{scope.row.name}}</span>
           </template>
         </el-table-column>
 
-        <el-table-column prop="fangshi" label="组卷方式" />
-        <el-table-column prop="fenlei" label="试卷分类" />
-        <el-table-column prop="zonfen" label="组卷总分" />
-        <el-table-column prop="cjr" label="创建人" />
-        <el-table-column prop="cjtime" label="创建时间" />
+        <el-table-column prop="fangshi" label="考试类型" />
+        <el-table-column prop="fenlei" label="考试时间" />
+        <el-table-column prop="zonfen" label="考试总分" />
         <el-table-column label="操作">
           <template #default=scope v-slot="scope">
             <!--          <el-button size="small" @click="deletcg(scope.row.postId)" :icon="Delete" circle color="red"></el-button>-->
