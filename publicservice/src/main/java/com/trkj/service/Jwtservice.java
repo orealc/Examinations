@@ -1,4 +1,4 @@
-package service;
+package com.trkj.service;
 
 import java.util.Date;
 
