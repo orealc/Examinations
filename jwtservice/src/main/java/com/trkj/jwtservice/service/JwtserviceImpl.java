@@ -3,9 +3,8 @@ package com.trkj.jwtservice.service;
 import com.trkj.jwtservice.util.JwtTokenUtil;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
-import service.Jwtservice;
+import com.trkj.jwt.service.Jwtservice;
 
-import java.util.Date;
 @DubboService
 public class JwtserviceImpl implements Jwtservice {
     @Autowired
@@ -46,9 +45,9 @@ public class JwtserviceImpl implements Jwtservice {
 //        return refreshToken(token);
 //    }
 //
-//    @Override
-//    public Boolean validateToken(String token, String userName) {
-//        return validateToken(token,userName);
-//    }
+    @Override
+    public Boolean validateToken(String token, String userName) {
+        return validateToken(token,userName);
+    }
 
 }

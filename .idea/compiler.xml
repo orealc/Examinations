@@ -24,7 +24,7 @@
       <module name="es-staff-service" target="1.8" />
       <module name="es-user-service" target="1.8" />
       <module name="jwtservice" target="1.8" />
-      <module name="publicservice" target="1.8" />
+      <module name="publicservice" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

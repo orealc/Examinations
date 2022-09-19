@@ -1,0 +1,13 @@
+GET http://localhost:8081/index
+Accept: application/json
+jwtAuth:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqd3RkZW1vIiwidWlkIjoiMTIzNDU2IiwidW5hbWUiOiIyMzQiLCJleHAiOjE2NjMxMTk5MDQsImlhdCI6MTY2MzExOTMwNDQ0MH0.-Xsv3jX3wARVbdLBFczTsn_87TI4F3sQT-8OhumIca_4ex0iwcFi0S6MuFGYc8_k2f8HBq8JDvn-7cDmXDb8FA
+###
+POST http://localhost:8081/login
+Content-Type: application/json
+
+{
+  "userName": "234",
+  "userId": "123456"
+}
+
+###
