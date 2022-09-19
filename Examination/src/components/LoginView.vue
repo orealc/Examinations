@@ -30,6 +30,7 @@
 				<el-form-item>
 					<el-button type="primary">登录</el-button>
 					<el-button type="primary" @click="qx()" >注册</el-button>
+					<el-button type="primary" @click="yg()" >员工登录</el-button>
 				</el-form-item>
 			</el-form>
 	</div>
@@ -46,6 +47,9 @@
 	})
 	function qx(){
 		router.push({name:'zhuce'})
+	}
+	function yg() {
+		router.push({path:'/yg'})
 	}
 </script>
 <style>
