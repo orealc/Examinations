@@ -1,8 +1,8 @@
-package com.trkj.ltuserservice.exception;
+package com.trkj.esuserservice.exception;
 
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.trkj.ltuserservice.vo.AjaxResponse;
+import com.trkj.esuserservice.vo.AjaxResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.http.converter.HttpMessageNotReadableException;

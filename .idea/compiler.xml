@@ -7,13 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="es-user-service" />
-        <module name="es-questionbank-service" />
-        <module name="es-staff-service" />
-        <module name="es-expaper-service" />
-        <module name="es-gateway-service" />
-        <module name="publicservice" />
         <module name="jwtservice" />
+        <module name="es-gateway-service" />
+        <module name="es-user-service" />
+        <module name="publicservice" />
+        <module name="es-expaper-service" />
+        <module name="es-staff-service" />
+        <module name="es-questionbank-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,7 +24,7 @@
       <module name="es-staff-service" target="1.8" />
       <module name="es-user-service" target="1.8" />
       <module name="jwtservice" target="1.8" />
-      <module name="publicservice" target="1.5" />
+      <module name="publicservice" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

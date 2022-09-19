@@ -1,8 +1,9 @@
 package com.trkj.esuserservice.controller;
 
-import com.trkj.topicuserservice.service.UserService;
+import com.trkj.esuserservice.service.UserService;
+import com.trkj.esuserservice.vo.AjaxResponse;
+import com.trkj.esuserservice.service.UserService;
 import com.trkj.user.vo.UserVo;
-import com.trkj.view.vo.AjaxResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

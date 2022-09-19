@@ -1,4 +1,4 @@
-package com.trkj.ltuserservice.exception;
+package com.trkj.esuserservice.exception;
 
 public class CustomError extends RuntimeException {
     //异常错误编码
