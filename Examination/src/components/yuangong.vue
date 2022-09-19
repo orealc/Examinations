@@ -41,7 +41,7 @@
                           size="large"
                           placeholder="搜索考试名称"
                           :suffix-icon="Search"
-                          style="width: 200px;position: relative;left: -450px;"
+                          style="width: 200px;position: relative;left: 60px;"
                   />
                </div>
                <div style="position: absolute;top: 1px;left: 300px;">
@@ -56,9 +56,17 @@
                   />
                </div>
                <div style="width: 95%;height: 370px;border: 1px solid blue;margin:0px auto;position: relative;top: 10px;">
-                  <el-table :data="tableData" style="width: 100%">
-                     <el-table-column prop="date" label="考试名称" width="180" />
-                     <el-table-column prop="name" label="时长" width="180" />
+                  <el-table
+                          :data="tableData"
+                          style="width: 100%"
+                  >
+                     <el-table-column prop="date" label="考试名称" width="180">
+                        <template #default=scope v-slot="scope">
+                           <span style="color: #00aaff" @click="dialogFormVisible = true">{{scope.row.date}}</span>
+                        </template>
+                     </el-table-column>
+                     <el-table-column prop="name" label="时长" width="180" >
+                     </el-table-column>
                      <el-table-column prop="address" label="总分" />
                      <el-table-column prop="address" label="及格分" />
                      <el-table-column prop="address" label="开放时间" />
@@ -72,6 +80,77 @@
                <Hello></Hello>
             </el-tab-pane>
          </el-tabs>
+         <!--弹窗-->
+         <el-dialog v-model="dialogFormVisible" title="Shipping address" width="900px">
+            <el-descriptions
+                    class="margin-top"
+                    title="考试信息"
+                    :column="3"
+                    :size="size"
+                    border
+            >
+
+               <el-descriptions-item>
+                  <template #label>
+                     <div class="cell-item">
+                        考试名称
+                     </div>
+                  </template>
+                  铁道知识
+               </el-descriptions-item>
+               <el-descriptions-item>
+                  <template #label>
+                     <div class="cell-item">
+
+                        考试总分
+                     </div>
+                  </template>
+                  100
+               </el-descriptions-item>
+               <el-descriptions-item>
+                  <template #label>
+                     <div class="cell-item">
+
+                       及格分数
+                     </div>
+                  </template>
+                  70
+               </el-descriptions-item>
+               <el-descriptions-item>
+                  <template #label>
+                     <div class="cell-item">
+
+                        考试时长
+                     </div>
+                  </template>
+                  <el-tag size="small">120分钟</el-tag>
+               </el-descriptions-item>
+               <el-descriptions-item>
+                  <template #label>
+                     <div class="cell-item">
+                        考试类型
+                     </div>
+                  </template>
+                 正式考试
+               </el-descriptions-item>
+               <el-descriptions-item>
+                  <template #label>
+                     <div class="cell-item">
+                       注意事项
+                     </div>
+                  </template>
+                 认真做题
+               </el-descriptions-item>
+            </el-descriptions>
+            <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">返回</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false,DaTi()"
+        >开始考试</el-button
+        >
+      </span>
+            </template>
+         </el-dialog>
       </div>
       <div style="width: 80%;height: 30px;border: 1px solid black;margin:0 auto;position: relative;top: 60px;">
          分页
@@ -87,7 +166,7 @@
    }
    const input1 = ref('')
    const value2 = ref('')
-
+   const dialogFormVisible = ref(false)
    const shortcuts = [
 
       {
@@ -130,6 +209,9 @@
    const router=useRouter()
    function route() {
       router.push({path:"/tiku"})
+   }
+   function DaTi() {
+      router.push({path:"/DaTi"})
    }
 </script>
 

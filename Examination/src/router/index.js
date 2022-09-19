@@ -9,6 +9,7 @@ import HelloWorld from "../components/monikaos.vue";
 import tiku from "../components/tiku.vue"
 import ShiJuan from "../components/ShiJuan.vue"
 import KaoShi from "../components/KaoShi.vue"
+import DaTi from "../components/DaTi.vue";
 const modules =
     import.meta.glob('../components/**/*.vue');
 
@@ -23,7 +24,7 @@ const routes = [{
         component: zhuce,
 
     },
-    {path:"/",component: yuangong},
+    {path:"/yg",component: yuangong},
     {path: "/HelloWorld",component: HelloWorld},
     {path: "/tiku",component: tiku},
     {
@@ -38,6 +39,7 @@ const routes = [{
         component: KaoShi,
 
     },
+    {path: "/DaTi",component: DaTi}
 
 ]
 

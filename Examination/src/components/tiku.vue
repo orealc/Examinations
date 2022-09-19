@@ -33,7 +33,6 @@
         </div>
         <!--主体-->
         <div style="width: 80%;height: 520px;border: 1px solid black;margin:0 auto;position: relative;top: 40px;background-color: white">
-
                     <div style="width: 95%;height: 370px;border: 1px solid blue;margin:0px auto;position: relative;top: 10px;">
                         <el-table :data="tableData" style="width: 100%">
                             <el-table-column prop="date" label="考试名称" width="180" />
@@ -105,7 +104,7 @@
         router.push({path:"/tiku"})
     }
     function route1() {
-        router.push({path:"/"})
+        router.push({path:"/yg"})
     }
 </script>
 
