@@ -6,15 +6,18 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
+        <option value="$PROJECT_DIR$/jwtservice/pom.xml" />
+        <option value="$PROJECT_DIR$/es-user-service/pom.xml" />
         <option value="$PROJECT_DIR$/es-expaper-service/pom.xml" />
         <option value="$PROJECT_DIR$/es-gateway-service/pom.xml" />
         <option value="$PROJECT_DIR$/es-questionbank-service/pom.xml" />
         <option value="$PROJECT_DIR$/es-staff-service/pom.xml" />
-        <option value="$PROJECT_DIR$/es-user-service/pom.xml" />
-        <option value="$PROJECT_DIR$/jwtservice/pom.xml" />
         <option value="$PROJECT_DIR$/publicservice/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_14" default="false" project-jdk-name="1.8 (2)" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_14" project-jdk-name="1.8 (2)" project-jdk-type="JavaSDK" />
+  <component name="ProjectType">
+    <option name="id" value="jpab" />
+  </component>
 </project>

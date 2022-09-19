@@ -7,13 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="es-gateway-service" />
         <module name="es-user-service" />
-        <module name="publicservice" />
-        <module name="es-expaper-service" />
-        <module name="es-staff-service" />
-        <module name="jwtservice" />
         <module name="es-questionbank-service" />
+        <module name="es-staff-service" />
+        <module name="es-expaper-service" />
+        <module name="es-gateway-service" />
+        <module name="publicservice" />
+        <module name="jwtservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
