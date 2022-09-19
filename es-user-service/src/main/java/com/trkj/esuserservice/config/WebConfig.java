@@ -1,7 +1,7 @@
 package com.trkj.esuserservice.config;
 
 
-import com.trkj.topicuserservice.interceptor.TokenInterceptor;
+import com.trkj.esuserservice.interceptor.TokenInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

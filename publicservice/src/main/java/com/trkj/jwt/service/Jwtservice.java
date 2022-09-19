@@ -1,4 +1,4 @@
-package com.trkj.service;
+package com.trkj.jwt.service;
 
 import java.util.Date;
 
@@ -52,7 +52,7 @@ public interface Jwtservice {
 //     * @param userName 用户
 //     * @return 是否有效
 //     */
-//    public Boolean validateToken(String token, String userName);
+    public Boolean validateToken(String token);
 //
 //    /**
 //     * 从claims生成令牌
@@ -65,5 +65,4 @@ public interface Jwtservice {
 
     //验证token
     Boolean isTokenExpired(String token);
-
 }
