@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class TestpaperEntity {
     private int testpaperid;
-    private int testid;
     private String testname;
     private String testclassification;
     private String testmethod;
-    private int questionsnum;
-    private double questionscore;
+    private int questionsnum;//统计试题数量
+    private double questionscore;//试题总分
+
 }

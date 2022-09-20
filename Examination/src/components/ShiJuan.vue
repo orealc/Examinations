@@ -22,6 +22,7 @@ import {ElMessage} from "element-plus";
 
 var data = reactive({
   contracts: [],
+  shiti:[],
   total: 0,
   pageNum: 1,
   pageSize: 5,
@@ -32,86 +33,35 @@ const form = reactive({
 const dialogFormVisible = ref(false)
 const dialogFormVisible2 = ref(false)
 const a=ref("");
-const bbbb=[
-  {
-    lx:'安抚',
-    nr:'奥璨',
-    tk:'传送',
-    jb:'阿萨',
-  },  {
-    lx:'安抚',
-    nr:'奥璨',
-    tk:'传送',
-    jb:'阿萨',
-  },  {
-    lx:'安抚',
-    nr:'奥璨',
-    tk:'传送',
-    jb:'阿萨',
-  },  {
-    lx:'安抚',
-    nr:'奥璨',
-    tk:'传送',
-    jb:'阿萨',
-  }
-]
-const aaaa=[
-  {
-    name:'阿布',
-    fangshi:'武器',
-    fenlei:'为呃',
-    zonfen:'公海',
-    cjr:'前往',
-    cjtime:'2022-2-2'
-  },
-  {
-    name:'阿布',
-    fangshi:'武器',
-    fenlei:'为呃',
-    zonfen:'公海',
-    cjr:'前往',
-    cjtime:'2022-2-2'
-  },
-  {
-    name:'阿布',
-    fangshi:'武器',
-    fenlei:'为呃',
-    zonfen:'公海',
-    cjr:'前往',
-    cjtime:'2022-2-2'
-  },
-  {
-    name:'阿布',
-    fangshi:'武器',
-    fenlei:'为呃',
-    zonfen:'公海',
-    cjr:'前往',
-    cjtime:'2022-2-2'
-  },
-  {
-    name:'阿布',
-    fangshi:'武器',
-    fenlei:'为呃',
-    zonfen:'公海',
-    cjr:'前往',
-    cjtime:'2022-2-2'
-  }
-  ,  {
-    name:'阿布',
-    fangshi:'武器',
-    fenlei:'为呃',
-    zonfen:'公海',
-    cjr:'前往',
-    cjtime:'2022-2-2'
-  }
-]
+onBeforeMount(() => {
+  axios.get("http://localhost:8089/TestpaperController/selectsj", {
+  }).then(function(response) {
+    console.log(response.data.data)
+    data.contracts = response.data.data
+    data.total = response.data.data.total
+    console.log(data.contracts)
+  }).catch(function(error) {
+    console.log(error)
+  })
+})
+//查询试题
+function selectst() {
+  axios.get("http://localhost:8089/TquestionsController/selectst", {
+  }).then(function (response) {
+    //console.log(response.data.data)
+    data.shiti.length = 0
+    data.shiti = response.data.data
+    console.log(data.contracts)
+  }).catch(function (error) {
+    console.log(error)
+  })
+}
 </script>
 
 <template>
 <div style="padding: 10px" id="aa">
 <!--搜索功能区域-->
   <div style="position: relative;bottom: 25px">
-
 
     <el-select v-model="ShiJuan" autocomplete="off" placeholder="试卷分类" style="width: 10%" clearable>
       <el-option label="全部分类" value="全部分类"></el-option>
@@ -130,25 +80,24 @@ const aaaa=[
   </div>
   <!-- 功能区域 -->
 
-    <el-button type="primary" @click="dialogFormVisible = true" style="position: relative;">+ 添加</el-button>
+    <el-button type="primary" @click="dialogFormVisible = true,selectst()" style="position: relative;">+ 添加</el-button>
 
 
   <div style="width: 1400px;margin-top: 25px">
-    <el-table :data="aaaa"  border stripe style="width: 99%" >
+    <el-table :data="data.contracts"  border stripe style="width: 99%" >
       <!-- sortable排序 -->
       <el-table-column type="selection" width="55" />
       <el-table-column type="index" label="序号" />
-      <el-table-column prop="name" label="试卷名称" width="180">
+      <el-table-column prop="testname" label="试卷名称" width="180">
         <template #default=scope v-slot="scope">
-          <span style="color: #00aaff">{{scope.row.name}}</span>
+          <span style="color: #00aaff">{{scope.row.testname}}</span>
         </template>
       </el-table-column>
 
-      <el-table-column prop="fangshi" label="组卷方式" />
-      <el-table-column prop="fenlei" label="试卷分类" />
-      <el-table-column prop="zonfen" label="组卷总分" />
-      <el-table-column prop="cjr" label="创建人" />
-      <el-table-column prop="cjtime" label="创建时间" />
+      <el-table-column prop="testmethod" label="组卷方式" />
+      <el-table-column prop="testclassification" label="试卷分类" />
+      <el-table-column prop="questionscore" label="试卷总分" />
+      <el-table-column prop="questionsnum" label="试题数量" />
       <el-table-column label="操作">
         <template #default=scope v-slot="scope">
           <!--          <el-button size="small" @click="deletcg(scope.row.postId)" :icon="Delete" circle color="red"></el-button>-->
@@ -192,14 +141,15 @@ const aaaa=[
         <el-input  placeholder="试题内容" style="width: 25%" clearable></el-input>
         <br/>
         <div style="width: 800px;margin-top: 25px">
-          <el-table :data="bbbb"  border stripe style="width: 99%" >
+          <el-table :data="data.shiti"  border stripe style="width: 99%" >
             <!-- sortable排序 -->
             <el-table-column type="selection" width="55" />
             <el-table-column type="index" label="序号" />
-            <el-table-column prop="lx" label="试题类型" />
-            <el-table-column prop="nr" label="试题内容" />
-            <el-table-column prop="tk" label="所属题库" />
-            <el-table-column prop="jb" label="级别" />
+            <el-table-column prop="tqtype" label="试题类型" />
+            <el-table-column prop="tcontent" label="试题内容" />
+            <el-table-column prop="qbname" label="所属题库" />
+            <el-table-column prop="tqlevel" label="级别" />
+            <el-table-column prop="tqtime" label="创建时间" />
           </el-table>
         </div>
         <br/>

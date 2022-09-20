@@ -2,11 +2,14 @@ package com.trkj.user.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class ExaminationEntity {
+public class ExaminationEntity implements Serializable {
         private int examinationid;
         private int testpaperid;
         private String examname;
         private String examtype;
-        private double totalscore;
+        private String kssc;
+        private double questionscore;
 }

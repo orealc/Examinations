@@ -3,6 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.esexpaperservice.dao.Testpaper">
     <select id="selectsj" resultType="com.trkj.user.entity.TestpaperEntity">
-
+        select count(testid) questionsnum,
+               testpaper.testname testname,
+               testpaper.testclassification testclassification,
+               testpaper.testmethod testmethod,
+               testpaper.questionscore questionscore
+        from sjstzjb
+                 LEFT JOIN testpaper on sjstzjb.testpaperid=testpaper.testpaperid
     </select>
 </mapper>
