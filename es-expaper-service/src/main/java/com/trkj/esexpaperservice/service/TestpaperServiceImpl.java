@@ -18,4 +18,16 @@ public class TestpaperServiceImpl implements TestpaperService {
     public List<TestpaperEntity> selectsj() {
         return testpaper.selectsj();
     }
+
+    @Override
+    public int insertsj(TestpaperEntity testpaperEntity) {
+        return testpaper.insertsj(testpaperEntity);
+    }
+
+    @Override
+    public int selectzh() {
+        return testpaper.selectzh();
+    }
+
+
 }

@@ -1,11 +1,11 @@
 package com.trkj.esexpaperservice.controller;
 
 import com.trkj.jwt.service.ExaminationService;
+import com.trkj.user.entity.ExaminationEntity;
 import com.trkj.vo.AjaxResponse;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 @RequestMapping("/expapaer")
 @RestController
 public class ExaminationController {
@@ -15,5 +15,10 @@ public class ExaminationController {
     @GetMapping("/selectks")
     public AjaxResponse selectks(){
         return AjaxResponse.success(examinationService.selectks());
+    }
+    //添加考试
+    @PostMapping("/insertks")
+    public AjaxResponse insertks(@RequestBody ExaminationEntity examinationEntity){
+        return AjaxResponse.success(examinationService.insertks(examinationEntity));
     }
 }

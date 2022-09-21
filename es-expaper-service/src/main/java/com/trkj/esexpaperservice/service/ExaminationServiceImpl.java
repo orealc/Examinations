@@ -15,4 +15,9 @@ public class ExaminationServiceImpl implements ExaminationService {
     public List<ExaminationEntity> selectks() {
         return examination.selectks();
     }
+
+    @Override
+    public int insertks(ExaminationEntity examinationEntity) {
+        return examination.insertks(examinationEntity);
+    }
 }
