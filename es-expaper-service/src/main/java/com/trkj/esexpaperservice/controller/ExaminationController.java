@@ -13,8 +13,8 @@ public class ExaminationController {
     private ExaminationService examinationService;
     //查询全部考试
     @GetMapping("/selectks")
-    public AjaxResponse selectks(){
-        return AjaxResponse.success(examinationService.selectks());
+    public AjaxResponse selectks(int pageNum,int pageSize,String examname){
+        return AjaxResponse.success(examinationService.selectks(pageNum,pageSize,examname));
     }
     //添加考试
     @PostMapping("/insertks")

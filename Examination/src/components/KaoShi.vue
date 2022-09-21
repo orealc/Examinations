@@ -26,6 +26,7 @@ var data = reactive({
   total: 0,
   pageNum: 1,
   pageSize: 5,
+  examname:[],
 })
 const form = reactive({
 shuz:[],
@@ -48,21 +49,41 @@ function SelectionChange(val) {
   }
   console.log("id", form.testpaperid)
 }
-
+//页面挂载前
 onBeforeMount(() => {
   axios.get("http://localhost:8089/expapaer/selectks", {
+    params:{
+      pageNum:1,
+      pageSize:5,
+    }
   }).then(function(response) {
-    console.log(response.data.data)
-    data.contracts = response.data.data
+    data.contracts = response.data.data.list
+    data.total = response.data.data.total
+  }).catch(function(error) {
+    console.log(error)
+  })
+})
+//分页查询
+function page() {
+  console.log(data.examname)
+  axios.get("http://localhost:8089/expapaer/selectks", {
+    params: {
+      examname:data.examname,
+      pageNum: data.pageNum,
+      pageSize: data.pageSize
+    }
+  }).then(function(response) {
+    data.contracts = response.data.data.list
     data.total = response.data.data.total
     console.log(data.contracts)
   }).catch(function(error) {
     console.log(error)
   })
-})
+}
+
 //查询试卷
-function selectsj() {
-  axios.get("http://localhost:8089/TestpaperController/selectsj", {}).then(function (response) {
+function cxsj() {
+  axios.get("http://localhost:8089/TestpaperController/cxsj", {}).then(function (response) {
     console.log(response.data.data)
     data.shijuan = response.data.data
     data.total = response.data.data.total
@@ -92,17 +113,17 @@ function insertks(){
     <div style="position: relative;bottom: 25px">
 
 
-      <el-select v-model="a" autocomplete="off" placeholder="考试类型" style="width: 15%" clearable>
-        <el-option label="正式考试" value="正式考试"></el-option>
-        <el-option label="模拟考试" value="模拟考试"></el-option>
-      </el-select>
-      &nbsp
-      <el-input placeholder="考试名称" style="width: 15%" clearable></el-input>
-      <el-button type="primary" style="margin-left: 5px">查询</el-button>
+<!--      <el-select v-model="a" autocomplete="off" placeholder="考试类型" style="width: 15%" clearable>-->
+<!--        <el-option label="正式考试" value="正式考试"></el-option>-->
+<!--        <el-option label="模拟考试" value="模拟考试"></el-option>-->
+<!--      </el-select>-->
+<!--      &nbsp-->
+      <el-input v-model="data.examname" placeholder="考试名称" style="width: 15%" clearable></el-input>
+      <el-button @click="page" type="primary" style="margin-left: 5px">查询</el-button>
     </div>
     <!-- 功能区域 -->
 
-    <el-button type="primary" @click="dialogFormVisible = true;selectsj()" style="position: relative;">+ 添加</el-button>
+    <el-button type="primary" @click="dialogFormVisible = true;cxsj()" style="position: relative;">+ 添加</el-button>
 
 
     <div style="width: 700px;margin-top: 25px">

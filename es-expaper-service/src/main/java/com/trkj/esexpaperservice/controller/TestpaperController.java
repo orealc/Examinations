@@ -6,6 +6,7 @@ import com.trkj.user.entity.SjstzjbEntity;
 import com.trkj.user.entity.TestpaperEntity;
 import com.trkj.vo.AjaxResponse;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.aspectj.weaver.loadtime.Aj;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,11 +16,15 @@ public class TestpaperController {
     private TestpaperService testpaperService;
     @DubboReference
     private SjstzjbService sjstzjbService;
-    //查询全部试卷
+    //查询试卷
+    @GetMapping("/cxsj")
+    public AjaxResponse cxsj(){
+        return AjaxResponse.success(testpaperService.cxsj());
+    }
+    //分页查询全部试卷
     @GetMapping("/selectsj")
-    public AjaxResponse selectsj(){
-        System.out.println("111111111111");
-        return AjaxResponse.success(testpaperService.selectsj());
+    public AjaxResponse selectsj(int pageNum,int pageSize,String testname){
+            return AjaxResponse.success(testpaperService.selectsj(pageNum,pageSize,testname));
     }
     //添加试卷（同时添加试卷试题中间表）
     @PostMapping("insertsj")

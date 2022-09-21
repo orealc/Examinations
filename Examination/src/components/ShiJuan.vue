@@ -25,13 +25,18 @@ var data = reactive({
   total: 0,
   pageNum: 1,
   pageSize: 5,
-
+  testname:[],
 })
 const form = reactive({
   testname:'',//试卷名称
   testclassification:'',//试卷分类
   questionscore:'',//试卷总分
   shuz:[],//
+  shuz2:[],//
+  examinationid:'',
+  examname:'',
+  examtype:'',
+  testpaperid:'',
 })
 const dialogFormVisible = ref(false)
 const dialogFormVisible2 = ref(false)
@@ -47,17 +52,44 @@ function SelectionChange(val) {
   }
   console.log("数组",form.shuz)
 }
+function SelectionChange2(val) {
+  form.shuz2.length=0;
+  for (var i=0;i<val.length;i++){
+    form.testpaperid=val[i].testpaperid
+  }
+  console.log("id", form.testpaperid)
+}
 onBeforeMount(() => {
   axios.get("http://localhost:8089/TestpaperController/selectsj", {
+    params:{
+      pageNum:1,
+      pageSize:5,
+    }
   }).then(function(response) {
-    console.log(response.data.data)
-    data.contracts = response.data.data
+    // console.log(response.data.data)
+    data.contracts = response.data.data.list
+    data.total = response.data.data.total
+    // console.log(data.contracts)
+  }).catch(function(error) {
+    console.log(error)
+  })
+})
+function page() {
+  console.log(data.testname)
+  axios.get("http://localhost:8089/TestpaperController/selectsj", {
+    params: {
+      testname:data.testname,
+      pageNum: data.pageNum,
+      pageSize: data.pageSize
+    }
+  }).then(function(response) {
+    data.contracts = response.data.data.list
     data.total = response.data.data.total
     console.log(data.contracts)
   }).catch(function(error) {
     console.log(error)
   })
-})
+}
 //查询试题
 function selectst() {
   axios.get("http://localhost:8089/TquestionsController/selectst", {
@@ -83,6 +115,19 @@ function insertsj(){
       console.log(error)
     })
 }
+//添加考试
+function insertks(){
+  axios.post("http://localhost:8089/expapaer/insertks",form,{
+  }).then(function (a){
+    if(a.data.code !=200){
+      alert("失败");
+      qx();
+    }
+    qx()
+  }).catch(function (error){
+    console.log(error)
+  })
+}
 </script>
 
 <template>
@@ -93,20 +138,8 @@ function insertsj(){
 <!--搜索功能区域-->
   <div style="position: relative;bottom: 25px">
 
-    <el-select v-model="ShiJuan" autocomplete="off" placeholder="试卷分类" style="width: 10%" clearable>
-      <el-option label="全部分类" value="全部分类"></el-option>
-      <el-option label="理科" value="理科"></el-option>
-      <el-option label="社会学" value="社会学"></el-option>
-      <el-option label="近现代" value="近现代"></el-option>
-    </el-select>
-    &nbsp
-    <el-select autocomplete="off" placeholder="组卷方式" style="width: 10%" clearable>
-      <el-option label="抽题方式" value="抽题方式"></el-option>
-      <el-option label="选题方式" value="选题方式"></el-option>
-    </el-select>
-    &nbsp
-    <el-input placeholder="试卷名称" style="width: 10%" clearable></el-input>
-    <el-button type="primary" style="margin-left: 5px">查询</el-button>
+<!--    <el-input v-model="data.testname" placeholder="试卷名称" style="width: 10%" clearable></el-input>-->
+<!--    <el-button @click="page()" type="primary" style="margin-left: 5px">查询</el-button>-->
   </div>
   <!-- 功能区域 -->
 
@@ -114,7 +147,7 @@ function insertsj(){
     <br/>
 
   <div style="width: 1400px;margin-top: 25px">
-    <el-table :data="data.contracts"  border stripe style="width: 99%"  >
+    <el-table :data="data.contracts"  border stripe style="width: 99%"  @selection-change="SelectionChange2" row-key="testpaperid">
       <!-- sortable排序 -->
       <el-table-column type="selection" width="55" />
       <el-table-column type="index" label="序号" />
@@ -202,16 +235,20 @@ function insertsj(){
     <el-dialog v-model="dialogFormVisible2" title="创建考试">
       <el-form ref="ruleFormRef" :model="form" :rules="rules" :inline="true"  class="demo-form-inline" :size="formSize">
 
-        <el-select autocomplete="off" placeholder="考试类型" style="width: 25%" clearable>
-          <el-option label="正式考试" value="正式考试"></el-option>
-          <el-option label="模拟考试" value="模拟考试"></el-option>
-        </el-select>
-        &nbsp
-        <el-input  placeholder="考试名称" style="width: 25%" clearable></el-input>
+        <el-form-item prop="examname" label="考试名称" :label-width="formLabelWidth">
+          <el-input v-model="form.examname" autocomplete="off" />
+        </el-form-item>
+
+        <el-form-item label="考试类别">
+          <el-select v-model="form.examtype" placeholder="请选择">
+            <el-option label="正式" value="正式"></el-option>
+            <el-option label="模拟" value="模拟"></el-option>
+          </el-select>
+        </el-form-item>
         <br/>
         <br/>
         <el-form-item style="position: relative;top: 0px;">
-          <el-button type="primary" @click="addpost(form)"  :validate-event="false">确认</el-button>
+          <el-button type="primary" @click="insertks(form);qx()"  :validate-event="false">确认</el-button>
           <el-button @click="dialogFormVisible = false,qx()">取消</el-button>
         </el-form-item>
 

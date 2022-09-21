@@ -10,6 +10,19 @@
     <result column="questionscore" jdbcType="DOUBLE" property="questionscore"/>
 </resultMap>
 <!--    查询试卷-->
+    <select id="cxsj" resultType="com.trkj.user.entity.TestpaperEntity">
+        select count(testid) questionsnum,
+               testpaper.testpaperid testpaperid,
+               testpaper.testname testname,
+               testpaper.testclassification testclassification,
+               testpaper.testmethod testmethod,
+               testpaper.questionscore questionscore
+        from sjstzjb
+                 LEFT JOIN testpaper on sjstzjb.testpaperid=testpaper.testpaperid
+        GROUP BY sjstzjb.testpaperid
+order by testpaper.testpaperid desc
+    </select>
+<!--    分页查询试卷-->
     <select id="selectsj" resultType="com.trkj.user.entity.TestpaperEntity">
         select count(testid) questionsnum,
                testpaper.testpaperid testpaperid,
@@ -19,8 +32,7 @@
                testpaper.questionscore questionscore
         from sjstzjb
              LEFT JOIN testpaper on sjstzjb.testpaperid=testpaper.testpaperid
-        GROUP BY sjstzjb.testpaperid
-
+            GROUP BY sjstzjb.testpaperid
     </select>
 <!--    添加试卷-->
     <insert id="insertsj" >
