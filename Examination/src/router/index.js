@@ -10,6 +10,11 @@ import tiku from "../components/tiku.vue"
 import ShiJuan from "../components/ShiJuan.vue"
 import KaoShi from "../components/KaoShi.vue"
 import DaTi from "../components/DaTi.vue";
+import HomeView from '../view/HomeView.vue';
+import insertk from '../view/insertk.vue';
+import testgl from "../view/testgl.vue";
+import instest from "../view/instest.vue";
+
 const modules =
     import.meta.glob('../components/**/*.vue');
 
@@ -24,9 +29,9 @@ const routes = [{
         component: zhuce,
 
     },
-    {path:"/yg",component: yuangong},
-    {path: "/HelloWorld",component: HelloWorld},
-    {path: "/tiku",component: tiku},
+    {path: "/yg", component: yuangong},
+    {path: "/HelloWorld", component: HelloWorld},
+    {path: "/tiku", component: tiku},
     {
         path: '/ShiJuan',
         name: 'ShiJuan',
@@ -39,7 +44,26 @@ const routes = [{
         component: KaoShi,
 
     },
-    {path: "/DaTi",component: DaTi}
+    {path: "/DaTi", component: DaTi},
+    {
+        path: '/',
+        name: 'HomeView',
+        component: HomeView
+    },
+    {
+        path: '/insertk',
+        name: 'insertk',
+        component: insertk,
+
+    },
+    {
+        path: "/testgl",
+        component: testgl
+    },
+    {
+        path: "/instest",
+        component: instest
+    }
 
 ]
 

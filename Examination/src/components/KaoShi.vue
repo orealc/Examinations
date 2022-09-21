@@ -126,7 +126,7 @@ const aaaa=[
     <el-button type="primary" @click="dialogFormVisible = true" style="position: relative;">+ 添加</el-button>
 
 
-    <div style="width: 1400px;margin-top: 25px">
+    <div style="width: 1200px;margin-top: 25px">
       <el-table :data="aaaa"  border stripe style="width: 99%" >
         <!-- sortable排序 -->
         <el-table-column type="selection" width="55" />

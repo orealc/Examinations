@@ -33,6 +33,9 @@
 					<el-button type="primary" @click="yg()" >员工登录</el-button>
           <el-button type="primary" @click="yy()" >试卷页面</el-button>
           <el-button type="primary" @click="ks()" >考试页面</el-button>
+          <el-button type="primary" @click="hv()" >题库页面</el-button>
+          <el-button type="primary" @click="tegl()" >试题页面</el-button>
+          <el-button type="primary" @click="uptest()" >修改试题页面</el-button>
 				</el-form-item>
 			</el-form>
 	</div>
@@ -58,6 +61,13 @@
   }
   function ks(){
     router.push({name:'KaoShi'});
+  }
+  function hv(){
+    router.push({name:'HomeView'});
+  }function tegl(){
+    router.push({path:'/testgl'});
+  }function uptest(){
+    router.push({path:'/uptest'});
   }
 </script>
 <style>
