@@ -10,5 +10,6 @@ public class TestpaperEntity {
     private String testmethod;
     private int questionsnum;//统计试题数量
     private double questionscore;//试题总分
+    private int shuz[];
 
 }

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.esexpaperservice.dao.TquestionsDao">
+    <resultMap id="questionbankMap" type="com.trkj.esexpaperservice.entity.Tquestions">
+        <id column="testid" property="testid"/>
+        <result column="questionbankid" property="questionbankid"/>
+        <result column="tcontent" property="tcontent"/>
+        <result column="tqtype" property="tqtype"/>
+        <result column="tqlevel" property="tqlevel"/>
+        <result column="tqtime" property="tqtime"/>
+        <result column="qbname" property="qbname"/>
+    </resultMap>
+    <!--    条件模糊查询-->
+    <select id="eqselname" resultType="com.trkj.esexpaperservice.entity.Tquestions">
+        select
+        tquestions.questionbankid,questionbank.qbname,tquestions.tcontent,tquestions.tqtype,tquestions.tqlevel,tquestions.tqtime,tquestions.testid
+        from tquestions left join questionbank on tquestions.questionbankid=questionbank.questionbankid
+        <where>
+            <if test="tcontent!=null and tcontent!=''">
+                and tcontent like '%${tcontent}%'
+            </if>
+        </where>
+    </select>
+    <!--    根据id查询所有-->
+    <select id="findid" resultType="com.trkj.esexpaperservice.entity.Tquestions">
+        select tquestions.questionbankid,questionbank.qbname,tquestions.tcontent,tquestions.tqtype,tquestions.tqlevel,tquestions.tqtime,tquestions.testid
+        from tquestions left join questionbank on tquestions.questionbankid=questionbank.questionbankid where tquestions.testid=#{testid};
+    </select>
+    <!--    修改-->
+    <update id="uptquestion">
+        update tquestions
+        set
+        tqlevel=#{tqlevel},
+        tcontent=#{tcontent}
+        where tquestions.testid=#{testid}
+    </update>
+    <!--    试题新增-->
+    <insert id="insst" parameterType="com.trkj.esexpaperservice.entity.Tquestions">
+        insert into Tquestions (questionbankid,tcontent,tqtype,tqlevel) values (#{questionbankid},#{tcontent},#{tqtype},#{tqlevel})
+    </insert>
+    <!--    根据题库id查询试题-->
+    <select id="selstname" resultType="com.trkj.esexpaperservice.entity.Tquestions">
+        SELECT tquestions.questionbankid,tquestions.tcontent,tquestions.testid,tquestions.tqlevel,tquestions.tqtime,tquestions.tqtype FROM tquestions
+        left join questionbank on tquestions.questionbankid=questionbank.questionbankid where questionbank.questionbankid=#{questionbankid}
+    </select>
+</mapper>
