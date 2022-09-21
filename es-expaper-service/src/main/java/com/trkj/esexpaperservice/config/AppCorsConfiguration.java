@@ -19,9 +19,11 @@ public class AppCorsConfiguration {
     private CorsConfiguration buildConfig() {
         log.debug("开始设置");
         CorsConfiguration appCorsConfiguration = new CorsConfiguration();
+        // 允许的请求源
         appCorsConfiguration.addAllowedOrigin("http://localhost:3000");
         appCorsConfiguration.addAllowedOrigin("http://127.0.0.1:3000");
         appCorsConfiguration.addAllowedHeader("*"); // 2允许任何头
+        // 允许的请求的方法
         appCorsConfiguration.addAllowedMethod("OPTIONS");
         appCorsConfiguration.addAllowedMethod("HEAD");
         appCorsConfiguration.addAllowedMethod("GET");
@@ -29,8 +31,10 @@ public class AppCorsConfiguration {
         appCorsConfiguration.addAllowedMethod("POST");
         appCorsConfiguration.addAllowedMethod("DELETE");
         appCorsConfiguration.addAllowedMethod("PATCH");
+        // 是否允许携带cookies
         appCorsConfiguration.setAllowCredentials(true);//这两句不加不能跨域上传文件，
-        appCorsConfiguration.setMaxAge(3600L);//加上去就可
+        // 预请求的存活有效期
+        appCorsConfiguration.setMaxAge(60L);//加上去就可
         return appCorsConfiguration;
     }
 

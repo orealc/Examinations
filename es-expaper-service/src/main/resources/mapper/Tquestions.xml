@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.esexpaperservice.dao.Tquestions">
+    <select id="selectst" resultType="com.trkj.user.entity.TquestionsEntity">
+        select tquestions.testid,tquestions.tcontent,tquestions.tqtype,tquestions.tqlevel,tquestions.tqtime,questionbank.qbname
+        from tquestions
+                 LEFT JOIN questionbank
+                           on tquestions.questionbankid=questionbank.questionbankid;
+    </select>
+</mapper>

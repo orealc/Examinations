@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.esexpaperservice.dao.Examination">
+    <resultMap id="BaseResultMap" type="com.trkj.user.entity.ExaminationEntity">
+        <id column="examinationid" jdbcType="INTEGER" property="examinationid"/>
+        <result column="testpaperid" jdbcType="INTEGER" property="testpaperid"/>
+        <result column="examname" jdbcType="VARCHAR" property="examname"/>
+        <result column="examtype" jdbcType="VARCHAR" property="examtype"/>
+        <result column="kssc" jdbcType="VARCHAR" property="kssc"/>
+    </resultMap>
+    <select id="selectks" resultType="com.trkj.user.entity.ExaminationEntity">
+        select examination.examinationid,examination.testpaperid,examination.examname,
+               examination.examtype,examination.kssc,testpaper.questionscore
+        from examination left join testpaper ON examination.testpaperid=testpaper.testpaperid
+    </select>
+<insert id="insertks">
+    insert into examination (testpaperid,examname,examtype)
+    values (#{testpaperid},#{examname},#{examtype});
+</insert>
+</mapper>
