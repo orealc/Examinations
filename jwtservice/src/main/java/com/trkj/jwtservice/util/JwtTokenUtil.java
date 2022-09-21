@@ -39,10 +39,11 @@ public class JwtTokenUtil {
     public String generateToken(String userName, String userId) {
         Map<String, Object> claims = new HashMap<>(2);
         claims.put("sub", "jwtdemo");
-        claims.put("uname", userName);
-        claims.put("uid", userId);
+        claims.put("userName", userName);
+        claims.put("userId", userId);
         Date iatDate = new Date();
         claims.put("iat", iatDate);
+        System.out.println(claims+"ssssssssssss");
         return generateToken(claims);
     }
 
@@ -136,13 +137,10 @@ public class JwtTokenUtil {
      * 验证令牌
      *
      * @param token    令牌
-     * @param userName 用户
      * @return 是否有效
      */
-    public Boolean validateToken(String token, String userName) {
-
-        String uname = getUsernameFromToken(token);
-        return (uname.equals(userName) && !isTokenExpired(token));
+    public Boolean validateToken(String token) {
+        return (isTokenExpired(token));
     }
 
 
@@ -153,6 +151,7 @@ public class JwtTokenUtil {
      * @return 令牌
      */
     private String generateToken(Map<String, Object> claims) {
+        System.out.println(expire+"ssssssssssss");
         Date expirationDate = new Date(System.currentTimeMillis() + expire);
         /**
          * signWith() 签名方法。两个参数分别是签名算法和自定义的签名Key（盐）。

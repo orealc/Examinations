@@ -38,9 +38,28 @@
                                 </el-row>
                         </el-aside>
                         <el-main >-->
-                                <router-view></router-view>
+    <div id="login">
+        <router-view></router-view>
+    </div>
+
                     <!--    </el-main>
                 </el-container>
         </el-container>-->
 
 </template>
+
+<style>
+    *{
+        padding: 0px;
+        margin: 0px;
+    }
+    #login{
+       /* background-image: url("");*/
+        background: url("../src/assets/logo.png") no-repeat;
+        background-size: 100% 100%;
+        width: 100vw;
+        height: 100vh
+
+
+    }
+</style>

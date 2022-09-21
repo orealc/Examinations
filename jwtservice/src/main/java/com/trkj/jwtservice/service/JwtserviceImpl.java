@@ -12,7 +12,7 @@ public class JwtserviceImpl implements Jwtservice {
 
     @Override
     public Boolean validateToken(String token) {
-        return null;
+        return jwtTokenUtil.validateToken(token);
     }
 
     @Override

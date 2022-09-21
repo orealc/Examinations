@@ -38,8 +38,10 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         if (StringUtils.isEmpty(token)) {
             throw new SignatureException("token为空");
         }
-        if (jwtservice.validateToken(token))
+        System.out.println("--------------------"+(jwtservice==null));
+        if (jwtservice.validateToken(token)) {
             throw new SignatureException("token失效，请重新登录。");
+        }
         /** 设置 identityId 用户身份ID */
         // request.setAttribute("identityId", jwtTokenUtil.getUsernameFromToken(token));
         return true;

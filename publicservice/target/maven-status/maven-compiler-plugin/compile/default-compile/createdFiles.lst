@@ -1,7 +1,7 @@
 com\trkj\user\entity\UserEntity.class
 com\trkj\jwt\service\Jwtservice.class
 com\trkj\Exception\GlobalExceptionHandler.class
-com\trkj\user\vo\UserVo.class
 com\trkj\vo\AjaxResponse.class
 com\trkj\Exception\CustomError.class
 com\trkj\Exception\CustomErrorType.class
+com\trkj\user\vo\UserVo.class
