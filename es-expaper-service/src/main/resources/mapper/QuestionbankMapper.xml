@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.esexpaperservice.dao.QuestionbankDao">
+    <resultMap id="questionbankMap" type="com.trkj.esexpaperservice.entity.Questionbank">
+        <id column="questionbankid" property="questionbankid"/>
+        <result column="qbname" property="qbname"/>
+        <result column="qbclassification" property="qbclassification"/>
+        <result column="qbdescription" property="qbdescription"/>
+        <result column="qbnumber" property="qbnumber"/>
+        <result column="qbtime" property="qbtime"/>
+    </resultMap>
+    <!--    条件模糊查询-->
+    <select id="selname" resultType="com.trkj.esexpaperservice.entity.Questionbank">
+        select questionbank.questionbankid, questionbank.qbname,questionbank.qbclassification,questionbank.qbnumber,questionbank.qbtime,
+        questionbank.qbdescription
+        from questionbank
+        <where>
+            <if test="qbname!=null and qbname!=''">
+                and qbname like '%${qbname}%'
+            </if>
+        </where>
+    </select>
+    <!--    根据id查询所有-->
+    <select id="findtkid" resultType="com.trkj.esexpaperservice.entity.Questionbank">
+        select questionbank.questionbankid,questionbank.qbname,questionbank.qbclassification,questionbank.qbnumber,questionbank.qbtime,questionbank.qbdescription
+        from questionbank
+        where questionbank.questionbankid=#{questionbankid}
+    </select>
+    <!--    修改-->
+    <update id="uptikus">
+        update questionbank
+        set
+        qbname=#{qbname},
+        qbclassification=#{qbclassification},
+        qbdescription=#{qbdescription}
+        where questionbank.questionbankid=#{questionbankid}
+    </update>
+<!--    题库新增-->
+    <insert id="tkxz" parameterType="com.trkj.esexpaperservice.entity.Questionbank">
+        insert into questionbank (qbname,qbclassification,qbdescription)
+        values (#{qbname},#{qbclassification},#{qbdescription});
+    </insert>
+</mapper>

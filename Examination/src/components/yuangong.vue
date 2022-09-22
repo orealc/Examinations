@@ -22,7 +22,19 @@
          <div style="border: 1px solid black;width: 200px;height: 60px;position: relative;top: -123px;left: 1220px; ">
             <ul>
                <li>
-                  张三
+                  <el-dropdown>
+    <span class="el-dropdown-link">
+      张三
+      <el-icon class="el-icon--right">
+        <arrow-down />
+      </el-icon>
+    </span>
+                     <template #dropdown>
+                        <el-dropdown-menu>
+                           <el-dropdown-item><span @click="dialogTableVisible = true,selectjl()">考试记录</span></el-dropdown-item>
+                        </el-dropdown-menu>
+                     </template>
+                  </el-dropdown>
                </li>
                <li>
                   退出
@@ -37,136 +49,79 @@
             <el-tab-pane label="正式考试" name="first">
                <div >
                   <el-input
-                          v-model="input1"
+                          v-model="data.examname"
                           size="large"
                           placeholder="搜索考试名称"
                           :suffix-icon="Search"
                           style="width: 200px;position: relative;left: 60px;"
                   />
-               </div>
-               <div style="position: absolute;top: 1px;left: 300px;">
-                  <el-date-picker
-                          v-model="value2"
-                          type="datetimerange"
-                          :shortcuts="shortcuts"
-                          range-separator="至"
-                          start-placeholder="开始时间"
-                          end-placeholder="结束时间"
-                          size="large"
-                  />
+                   <el-button type="primary" style="margin-left: 70px;" @click="page()">搜索</el-button>
                </div>
                <div style="width: 95%;height: 370px;border: 1px solid blue;margin:0px auto;position: relative;top: 10px;">
                   <el-table
-                          :data="tableData"
+                          :data="data.shuju"
                           style="width: 100%"
                   >
-                     <el-table-column prop="date" label="考试名称" width="180">
+                     <el-table-column prop="examinationid" label="序列" width="180"  v-if="false">
+                     </el-table-column>
+                     <el-table-column prop="examname" label="考试名称" width="180">
                         <template #default=scope v-slot="scope">
-                           <span style="color: #00aaff" @click="dialogFormVisible = true">{{scope.row.date}}</span>
+                           <span style="color: #00aaff" @click="dialogFormVisible = true">{{scope.row.examname}}</span>
                         </template>
                      </el-table-column>
-                     <el-table-column prop="name" label="时长" width="180" >
+                     <el-table-column prop="questionscore" label="考试总分" width="180" >
                      </el-table-column>
-                     <el-table-column prop="address" label="总分" />
-                     <el-table-column prop="address" label="及格分" />
-                     <el-table-column prop="address" label="开放时间" />
-                     <el-table-column prop="address" label="售价" />
-                     <el-table-column prop="address" label="考试状态" />
+                     <el-table-column prop="examtype" label="类型" width="180" >
+                     </el-table-column>
+                     <el-table-column prop="kssc" label="考试状态" />
+                     <el-table-column  label="操作" width="180" >
+                        <template #default=scope v-slot="scope">
+                           <el-button type="primary" @click="DaTi(scope.row.examinationid)" v-if="scope.row.kssc=='进行中'">参加考试</el-button>
+                           <el-button type="success" @click="DaTi(scope.row.examinationid)" v-if="scope.row.kssc=='考试完毕'">重新考试</el-button>
+                        </template>
+                     </el-table-column>
                   </el-table>
                </div>
-
             </el-tab-pane>
             <el-tab-pane label="模拟考试" name="second">
-               <Hello></Hello>
+               <monikaos></monikaos>
             </el-tab-pane>
          </el-tabs>
-         <!--弹窗-->
-         <el-dialog v-model="dialogFormVisible" title="Shipping address" width="900px">
-            <el-descriptions
-                    class="margin-top"
-                    title="考试信息"
-                    :column="3"
-                    :size="size"
-                    border
-            >
-
-               <el-descriptions-item>
-                  <template #label>
-                     <div class="cell-item">
-                        考试名称
-                     </div>
-                  </template>
-                  铁道知识
-               </el-descriptions-item>
-               <el-descriptions-item>
-                  <template #label>
-                     <div class="cell-item">
-
-                        考试总分
-                     </div>
-                  </template>
-                  100
-               </el-descriptions-item>
-               <el-descriptions-item>
-                  <template #label>
-                     <div class="cell-item">
-
-                       及格分数
-                     </div>
-                  </template>
-                  70
-               </el-descriptions-item>
-               <el-descriptions-item>
-                  <template #label>
-                     <div class="cell-item">
-
-                        考试时长
-                     </div>
-                  </template>
-                  <el-tag size="small">120分钟</el-tag>
-               </el-descriptions-item>
-               <el-descriptions-item>
-                  <template #label>
-                     <div class="cell-item">
-                        考试类型
-                     </div>
-                  </template>
-                 正式考试
-               </el-descriptions-item>
-               <el-descriptions-item>
-                  <template #label>
-                     <div class="cell-item">
-                       注意事项
-                     </div>
-                  </template>
-                 认真做题
-               </el-descriptions-item>
-            </el-descriptions>
-            <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">返回</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false,DaTi()"
-        >开始考试</el-button
-        >
-      </span>
-            </template>
-         </el-dialog>
       </div>
+      <!--考试记录-->
+      <el-dialog v-model="dialogTableVisible" title="考试记录">
+          <el-scrollbar height="400px">
+              <el-table :data="data.jl">
+                  <el-table-column property="recordid" label="序号" width="150" />
+                  <el-table-column property="realname" label="用户名" width="150" />
+                  <el-table-column property="testname" label="考试名称" width="200" />
+                  <el-table-column property="highestscore" label="考试分数" />
+                  <el-table-column property="recenttime" label="考试时间" v-slot="scope">
+                      <span>{{scope.row.recenttime.substring(0,10)}}</span>
+                  </el-table-column>
+              </el-table>
+          </el-scrollbar>
+
+      </el-dialog>
       <div style="width: 80%;height: 30px;border: 1px solid black;margin:0 auto;position: relative;top: 60px;">
-         分页
+          <el-pagination v-model:currentPage="this.data.pageNum" v-model:page-size="this.data.pageSize" layout="prev, pager, next"
+                         :total="this.data.total" @current-change="page" prev-text="上一页" next-text="下一页" style="margin-left: 500px" />
       </div>
    </div>
 </template>
 
 <script lang="ts" setup>
-   import { ref } from 'vue'
-   import { Search } from '@element-plus/icons-vue'
+   import {useStore} from "vuex"
+   import axios from 'axios'
+   import { ref,onBeforeMount,reactive} from 'vue'
    const handleSelect = (key: string, keyPath: string[]) => {
       console.log(key, keyPath)
    }
-   const input1 = ref('')
+   import monikaos from "../components/monikaos.vue";
+   const store=useStore();
    const value2 = ref('')
    const dialogFormVisible = ref(false)
+   const dialogTableVisible = ref(false)
    const shortcuts = [
 
       {
@@ -180,39 +135,71 @@
       },
 
    ]
-   const tableData = [
-      {
-         date: '2016-05-03',
-         name: 'Tom',
-         address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-         date: '2016-05-02',
-         name: 'Tom',
-         address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-         date: '2016-05-04',
-         name: 'Tom',
-         address: 'No. 189, Grove St, Los Angeles',
-      },
-      {
-         date: '2016-05-01',
-         name: 'Tom',
-         address: 'No. 189, Grove St, Los Angeles',
-      },
-   ]
+
    const activeName = ref("first")
-   import Hello from "./monikaos.vue"
-   import {useStore} from "vuex"
+   var data=reactive({
+      shuju:[],
+       jl:"",
+       pageNum: 1, //第一页
+       pageSize: 4, //一页有几条数据
+       total:0,
+       examname:'',
+   })
    import { useRoute ,useRouter, onBeforeRouteUpdate} from 'vue-router'
    const router=useRouter()
    function route() {
       router.push({path:"/tiku"})
    }
-   function DaTi() {
+   function DaTi(id) {
+      console.log("id",id);
+      store.commit("bcid",id);
       router.push({path:"/DaTi"})
    }
+   onBeforeMount(() => {
+      axios.get("http://localhost:8085/StaffController/select",{
+          params:{
+              pageNum: data.pageNum,
+              pageSize: data.pageSize,
+              examname:data.examname,
+          }
+      }).then(function(response) {
+         console.log(response.data.data)
+         data.shuju=response.data.data.list;
+          data.total = response.data.data.total
+         console.log("数据",data.shuju)
+      }).catch(function(error) {
+         console.log(error)
+      })
+   })
+   //上一页和下一页
+   function page() {
+       axios.get("http://localhost:8085/StaffController/select",{
+           params:{
+               pageNum: data.pageNum,
+               pageSize: data.pageSize,
+               examname:data.examname,
+           }
+       }).then(function(response) {
+           console.log(response.data.data)
+           data.shuju=response.data.data.list;
+           data.total = response.data.data.total
+           console.log("数据",data.shuju)
+       }).catch(function(error) {
+           console.log(error)
+       })
+   }
+
+function selectjl() {
+axios.get("http://localhost:8085/StaffController/selectjl",{
+    params:{
+        userid:1
+    }
+}).then(function (response) {
+console.log(response.data.data)
+    data.jl=response.data.data;
+
+})
+}
 </script>
 
 <style scoped>
