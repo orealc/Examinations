@@ -20,7 +20,7 @@
         from sjstzjb
                  LEFT JOIN testpaper on sjstzjb.testpaperid=testpaper.testpaperid
         GROUP BY sjstzjb.testpaperid
-order by testpaper.testpaperid desc 
+order by testpaper.testpaperid desc
     </select>
 <!--    分页查询试卷-->
     <select id="selectsj" resultType="com.trkj.user.entity.TestpaperEntity">
