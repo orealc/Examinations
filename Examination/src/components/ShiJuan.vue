@@ -104,16 +104,27 @@ function selectst() {
 }
 //添加试卷
 function insertsj(){
-    axios.post("http://localhost:8089/TestpaperController/insertsj?sz="+form.shuz, form,{
-    }).then(function(a) {
-      if (a.data.code !=200){
+  if(this.form.testname == ""){
+    ElMessage({
+      message:'试卷名称不能为空',
+      type:'warning'
+    });
+  }else if(this.form.questionscore == ""){
+  ElMessage({
+    message:'考试总分不能为空',
+      type:'warning'
+  })
+  }else {
+    axios.post("http://localhost:8089/TestpaperController/insertsj?sz=" + form.shuz, form, {}).then(function (a) {
+      if (a.data.code != 200) {
         alert("失败")
         qx()
       }
       qx()
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log(error)
     })
+  }
 }
 //添加考试
 function insertks(){
@@ -225,7 +236,7 @@ function insertks(){
         <br/>
         <br/>
         <el-form-item style="position: relative;top: 0px;">
-          <el-button type="primary" @click="insertsj(form);qx()"  :validate-event="false">确认</el-button>
+          <el-button type="primary" @click="insertsj(form);"  :validate-event="false">确认</el-button>
           <el-button @click="dialogFormVisible = false,qx()">取消</el-button>
         </el-form-item>
 
