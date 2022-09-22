@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trkj.esuserservice.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.trkj.user.entity.UserEntity">
+        <id column="userid" property="userid" />
+        <result column="deptid"  property="deptid" />
+        <result column="userName"  property="userName" />
+        <result column="phone"  property="phone" />
+        <result column="realname"  property="realname" />
+        <result column="password"  property="password" />
+        <result column="roleid"  property="roleid" />
+        <result column="deptname"  property="deptname" />
+        <result column="rolename"  property="rolename" />
+    </resultMap>
     <select id="login" resultType="com.trkj.user.vo.UserVo">
         select password,userName,userid,roleid from user where userName=#{userName} and password=#{password}
     </select>
@@ -14,5 +25,48 @@ from user u
 left join dept d on u.deptid=d.deptid
 left join role r on u.roleid=r.roleid
 where u.userid=#{userid}
+    </select >
+    <select id="xiugai1" resultType="com.trkj.user.entity.UserEntity">
+        select password from user where userid=#{userid}
     </select>
+    <update id="upxiugai" parameterType="com.trkj.user.entity.UserEntity">
+        update user
+        <set>
+            password=#{password}
+        </set>
+        where userid = #{userid}
+    </update>
+    <select id="usercx2" resultType="com.trkj.user.entity.UserEntity">
+        select u.userid,u.userName,u.password,u.phone,u.realname,r.rolename,d.deptname
+            from user u
+            left join dept d on u.deptid=d.deptid
+            left join role r on u.roleid=r.roleid
+    </select >
+    <select id="usercx3" resultType="com.trkj.user.entity.UserEntity">
+        select u.userid,u.userName,u.password,u.phone,u.realname,r.rolename,d.deptname
+            from user u
+            left join dept d on u.deptid=d.deptid
+            left join role r on u.roleid=r.roleid
+            where u.realname=#{realname} and d.deptname=#{deptname}
+    </select >
+    <select id="usercx4" resultType="com.trkj.user.entity.UserEntity">
+        select u.userid,u.userName,u.password,u.phone,u.realname,r.rolename,d.deptname,u.deptid,u.roleid
+            from user u
+            left join dept d on u.deptid=d.deptid
+            left join role r on u.roleid=r.roleid
+            where u.realname=#{realname}
+    </select >
+    <update id="xg" parameterType="com.trkj.user.entity.UserEntity">
+        update user u <set>u.roleid= #{roleid}</set> where u.realname=#{realname}
+    </update>
+    <update id="xg2" parameterType="com.trkj.user.entity.UserEntity">
+        update user u <set>u.deptid= #{deptid}</set> where u.realname=#{realname}
+    </update>
+    <update id="xg3" parameterType="com.trkj.user.entity.UserEntity">
+        update user
+        <set>
+            realname= #{realname},
+            phone=#{phone}
+        </set> where userid=#{userid}
+    </update>
 </mapper>

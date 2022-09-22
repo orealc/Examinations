@@ -54,6 +54,10 @@
 				ElMessage.error('密码或者账号有误!!!')
 			}else{
 				if(res.data.data.roleid ==1){
+					store.commit("updateUserInfo",res.data.data)
+					console.log("所有的值",res.data.data.roleid)
+					console.log("token值+++",store.state.userInfo.token)
+					console.log("userid+++",store.state.userInfo.userid)
 					ElMessage.success('登录成功,欢迎您')
 					router.push({name: 'yg'})
 				}else {

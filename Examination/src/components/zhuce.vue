@@ -118,7 +118,7 @@
 
 
     }
-    //查询仓库i
+    //查询部门
     function ddd() {
         axios.get("http://localhost:8082/usercontroller/deptIdcx").then(function (a) {
             data.dept = a.data.data

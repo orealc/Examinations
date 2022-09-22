@@ -1,53 +1,67 @@
+<script setup>
+    import {
+        h,
+        ref,
+        reactive,
+        onBeforeMount,
+        onMounted,
+        getCurrentInstance
+    } from 'vue'
+    /*import emp from "/pubjs/"*/
+    import {
+        useStore
+    } from "vuex"
+    import {
+        useRouter,
+        useRoute
+    } from 'vue-router'
+    import axios from "axios"
+    import {ElMessage} from "element-plus";
+    const store = useStore()
+    const router = useRouter()
+    const asideMenus = reactive({
+        aside: []
+    })
+    const route = useRoute()
+    onBeforeMount(() => {
+        //全局监听，页面刷新的时候将store里state的值存到sessionStorage中，
+        //然后从sessionStorage中获取，再赋值给store。然后再把session里面
+        //存的删除即可，相当于中间件的作用。在页面加载时读取sessionStorage
+        //里的状态信息
+        if (sessionStorage.getItem("state")) {
+            //替换 store 的根状态，状态合并
+            //Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性
+            //，复制到目标对象（target）。Object.assign(target, source1, source2);
+            var obj = JSON.parse(sessionStorage.getItem("state"))
+            console.log("obj=%o", obj)
+            if (obj.userName == "") {
+                return
+            }
+            console.log("------------------------------------------------------------")
+            store.replaceState(
+                Object.assign({},
+                    store.state,
+                    JSON.parse(sessionStorage.getItem("state"))
+                )
+            )
+        }
+    })
+</script>
 <template>
-        <!--<el-container>-->
-               <!-- <el-header v-show="store.state.userInfo.isValidate">
-                        <el-menu :default-active="activeMenu" class="el-menu-demo" mode="horizontal" @select="handleSelect"
-                                 background-color="#989898" text-color="#fff" active-text-color="#ffd04b" width="100%"
-                                 style="margin-left: -20px;" :ellipsis=false>
-                                <el-menu-item index="1" v-show="store.state.userInfo.isValidate">crm客户管理</el-menu-item>
-                                <el-sub-menu v-show="store.state.userInfo.isValidate" style="margin-left: 1332px;">
-                                        <template #title id="mz">{{store.state.userInfo.userName}}</template>
-                                        &lt;!&ndash;          <el-button type="primary" @click="dialogFormVisible = true" >个人信息</el-button>&ndash;&gt;
-                                        &lt;!&ndash;					<el-menu-item type="primary" @click="dialogFormVisible = true">个人信息</el-menu-item>&ndash;&gt;
-                                        <el-menu-item index="/logout" v-show="store.state.userInfo.isValidate" @click="sx()" >退出系统</el-menu-item>
-                                </el-sub-menu>
-
-                        </el-menu>
-                </el-header>-->
-                <!--<el-container>
-                        <el-aside width="200px" v-show="store.state.userInfo.isValidate">
-                                <el-row class="tac">
-                                        <el-col :span="24">
-                                                <el-scrollbar max-height="670px">
-                                                        <el-menu :default-active="activeMenu" class="el-menu-demo" mode="vertical"
-                                                                 @select="handleSelect" background-color="#545c64" text-color="#fff"
-                                                                 active-text-color="#ffd04b" unique-opened :ellipsis=false>
-                                                                <el-sub-menu v-for="nav in store.state.userInfo.menus"
-                                                                             v-show="store.state.userInfo.isValidate" :index="nav.url"
-                                                                             style="background-color: aquamarine;">
-                                                                        <template #title>
-                                                                                <span>{{nav.menuName}}&#45;&#45;{{nav.componentPath}}</span>
-                                                                        </template>
-                                                                        <el-menu-item v-for="children in nav.asideChildren" :index="children.url">
-                                                                                {{children.menuName}}
-                                                                        </el-menu-item>
-                                                                </el-sub-menu>
-                                                        </el-menu>
-                                                </el-scrollbar>
-                                        </el-col>
-                                </el-row>
-                        </el-aside>
-                        <el-main >-->
     <div id="login">
         <router-view></router-view>
     </div>
-
-                    <!--    </el-main>
-                </el-container>
-        </el-container>-->
-
 </template>
-
+<script>
+    export default {
+        name: "LoginView",
+        methods: {
+            menuClick(){
+                this.$router.push("/LoginView");
+            }
+        }
+    }
+</script>
 <style>
     *{
         padding: 0px;
@@ -59,7 +73,5 @@
         background-size: 100% 100%;
         width: 100vw;
         height: 100vh
-
-
     }
 </style>

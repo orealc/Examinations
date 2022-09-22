@@ -7,6 +7,7 @@ const store=createStore({
             userid:"",
             username:"",
             token:""
+
         },
     },
     getters:{
@@ -24,11 +25,11 @@ const store=createStore({
                 state.userInfo.userid=""
 
             }else{
-                console.log("更新用户状态.......用户名:%s",user.username)
+                console.log("更新用户状态.......用户名:%s",user.userName)
                 state.userInfo.username=user.userName
                 state.userInfo.userid=user.userid
                 state.userInfo.token=user.token
-                console.log("更新用户状态.......用户信息:%o",state.userInfo.menus)
+                console.log("更新用户状态.......用户信息:%o",state.userInfo.userid)
                 sessionStorage.setItem('state', JSON.stringify(state))
             }
 

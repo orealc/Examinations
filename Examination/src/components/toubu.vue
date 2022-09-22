@@ -19,7 +19,7 @@
                         <el-sub-menu index="2" router>
                             <template #title><span>员工管理</span></template>
                             <el-menu-item index="/genrenxx">个人信息</el-menu-item>
-                            <el-menu-item index="/BuMen1">员工信息</el-menu-item>
+                            <el-menu-item index="/yuangxx">员工信息</el-menu-item>
                         </el-sub-menu>
                         <el-sub-menu index="3" router>
                             <template #title><span>题库管理</span></template>
@@ -46,6 +46,9 @@
         methods: {
             menuClick(index) {
                 this.$router.push(index);
+            },
+            qx(){
+                this.$router.push("/");
             }
         }
     }
