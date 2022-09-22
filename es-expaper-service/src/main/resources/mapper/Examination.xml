@@ -13,6 +13,11 @@
         select examination.examinationid,examination.testpaperid,examination.examname,
                examination.examtype,examination.kssc,testpaper.questionscore
         from examination left join testpaper ON examination.testpaperid=testpaper.testpaperid
+<where>
+    <if test="examname !=null and examname!=''">
+        and examination.examname like '%${examname}%'
+    </if>
+</where>
     </select>
 <insert id="insertks">
     insert into examination (testpaperid,examname,examtype)

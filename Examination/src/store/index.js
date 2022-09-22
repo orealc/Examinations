@@ -9,10 +9,22 @@ const store=createStore({
             token:""
 
         },
+        sjid:"",//考试id
+        tkid:"",//题库id
+        tklx:"",
     },
     getters:{
         token:(state)=>{
             return state.userInfo.token
+        },
+        id:(state)=>{
+            return state.sjid
+        },
+        tid:(state)=>{
+            return state.tkid
+        },
+        lx:(state)=>{
+            return state.tklx
         }
     },
     mutations:{
@@ -33,7 +45,24 @@ const store=createStore({
                 sessionStorage.setItem('state', JSON.stringify(state))
             }
 
+        },
+        bcid(state,id){
+            console.log("------vuex")
+            state.sjid=id;
+            console.log("---id",state.sjid);
+            sessionStorage.setItem('state', JSON.stringify(state))
+        },
+        tikuid(state,id){
+            console.log("题库id",id)
+            state.tkid=id;
+            sessionStorage.setItem('state', JSON.stringify(state))
+        },
+        tklx(state,name){
+            console.log("题库类型",name)
+            state.tklx=name;
+            sessionStorage.setItem('state', JSON.stringify(state))
         }
+
     }
 })
 

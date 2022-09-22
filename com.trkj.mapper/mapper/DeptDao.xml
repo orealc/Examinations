@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.Dao.DeptDao">
+  <resultMap id="BaseResultMap" type="com.trkj.user.entity.Dept">
+    <id column="deptid" jdbcType="INTEGER" property="deptid" />
+    <result column="deptname" jdbcType="VARCHAR" property="deptname" />
+    <result column="deptitle" jdbcType="VARCHAR" property="deptitle" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    deptid, deptname, deptitle
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dept
+    where deptid = #{deptid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dept
+    where deptid = #{deptid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="deptid" keyProperty="deptid" parameterType="com.trkj.user.entity.Dept" useGeneratedKeys="true">
+    insert into dept (deptname, deptitle)
+    values (#{deptname,jdbcType=VARCHAR}, #{deptitle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="deptid" keyProperty="deptid" parameterType="com.trkj.user.entity.Dept" useGeneratedKeys="true">
+    insert into dept
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deptname != null">
+        deptname,
+      </if>
+      <if test="deptitle != null">
+        deptitle,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deptname != null">
+        #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptitle != null">
+        #{deptitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.trkj.user.entity.Dept">
+    update dept
+    <set>
+      <if test="deptname != null">
+        deptname = #{deptname,jdbcType=VARCHAR},
+      </if>
+      <if test="deptitle != null">
+        deptitle = #{deptitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where deptid = #{deptid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.trkj.user.entity.Dept">
+    update dept
+    set deptname = #{deptname,jdbcType=VARCHAR},
+      deptitle = #{deptitle,jdbcType=VARCHAR}
+    where deptid = #{deptid,jdbcType=INTEGER}
+  </update>
+</mapper>

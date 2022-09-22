@@ -3,6 +3,7 @@ package com.trkj.user.entity;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 public class TquestionsEntity {
@@ -13,4 +14,10 @@ public class TquestionsEntity {
     private Timestamp tqtime;//创建时间
     private int questionbankid;//题库id
     private String qbname;//题库名称
+    private int con;//统计
+    private List<String> answers;//试题选项内容
+    private List<String> isanswers;//是否为答案
+//    private String
+//    private List<Answers> answers;
+
 }

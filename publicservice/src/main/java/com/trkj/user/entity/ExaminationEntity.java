@@ -11,5 +11,5 @@ public class ExaminationEntity implements Serializable {
         private String examname;
         private String examtype;
         private String kssc;
-        private double questionscore;
+        private int questionscore;
 }

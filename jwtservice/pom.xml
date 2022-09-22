@@ -17,6 +17,7 @@
     </properties>
 
     <dependencies>
+<!--        启动器  spring-boot-starter-web，会自动导入web环境所有依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
