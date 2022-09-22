@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.esuserservice.dao.DeptDao">
+
+    <resultMap id="BaseResultMap" type="mapper.domain.Dept">
+            <id property="deptid" column="deptid" jdbcType="INTEGER"/>
+            <result property="deptname" column="deptname" jdbcType="VARCHAR"/>
+            <result property="deptitle" column="deptitle" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        deptid,deptname,deptitle
+    </sql>
+    <select id="deptIdcx" resultType="com.trkj.user.entity.Dept">
+        select <include refid="Base_Column_List" /> from dept
+    </select>
+</mapper>

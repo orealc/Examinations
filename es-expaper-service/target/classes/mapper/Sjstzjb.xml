@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.esexpaperservice.dao.SjstDao">
+    <resultMap id="BaseResultMap" type="com.trkj.user.entity.SjstzjbEntity">
+        <id column="sjstid" jdbcType="INTEGER" property="sjstid"></id>
+        <result column="testpaperid" jdbcType="INTEGER" property="testpaperid"/>
+        <result column="testid" jdbcType="INTEGER" property="testid"/>
+    </resultMap>
+<!--    中间表添加-->
+    <insert id="insertsjstzjb" parameterType="com.trkj.user.entity.SjstzjbEntity">
+            insert into sjstzjb(testpaperid,testid)
+            values (#{testpaperid},#{testid})
+    </insert>
+</mapper>

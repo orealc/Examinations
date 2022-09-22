@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         log.debug("注册TokenInterceptor");
         registry.addInterceptor(tokenInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns("/login");
+                .addPathPatterns("/usercontroller/**","/user/**")
+                .excludePathPatterns("/usercontroller/insertuser","/user/login","/usercontroller/deptIdcx").order(1);
     }
 }

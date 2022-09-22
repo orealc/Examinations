@@ -10,7 +10,6 @@ public class ExaminationEntity implements Serializable {
         private int testpaperid;
         private String examname;
         private String examtype;
-        private double totalscore;
         private String kssc;
         private int questionscore;
 }

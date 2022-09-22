@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.esuserservice.dao.UserDao">
+    <select id="login" resultType="com.trkj.user.vo.UserVo">
+        select password,userName,userid,roleid from user where userName=#{userName} and password=#{password}
+    </select>
+    <insert id="insertuser">
+        insert into user(userName,password,phone,realname,deptid)values(#{userName},#{password},#{phone},#{realname},#{deptid})
+    </insert>
+    <select id="usercx" resultType="com.trkj.user.entity.UserEntity">
+        select u.userid,u.userName,u.password,u.phone,u.realname,r.rolename,d.deptname
+from user u
+left join dept d on u.deptid=d.deptid
+left join role r on u.roleid=r.roleid
+where u.userid=#{userid}
+    </select>
+</mapper>
