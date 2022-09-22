@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trkj.esstaffservice.Dao.StaffDao">
+<select id="select" resultType="com.trkj.user.entity.ExaminationEntity">
+select examination.examinationid,examination.testpaperid,examination.examname,
+    examination.examtype,examination.kssc,testpaper.questionscore
+     from examination left join testpaper ON examination.testpaperid=testpaper.testpaperid
+     <where>
+         <if test=" examname !=null and examname != ''">
+             and examination.examname like '%${examname}%'
+         </if>
+         and examination.examtype='正式'
+     </where>
+</select>
+    <select id="selectmn" resultType="com.trkj.user.entity.ExaminationEntity">
+        select examination.examinationid,examination.testpaperid,examination.examname,
+        examination.examtype,examination.kssc,testpaper.questionscore
+        from examination left join testpaper ON examination.testpaperid=testpaper.testpaperid
+        <where>
+            <if test=" examname !=null and examname != ''">
+                and examination.examname like '%${examname}%'
+            </if>
+            and examination.examtype='模拟'
+        </where>
+    </select>
+    <select id="selectsjid" resultType="java.lang.Integer">
+        select testpaperid from examination where examinationid=#{examinationid}
+    </select>
+    <select id="selectsum" resultType="com.trkj.user.vo.SjstzjbVo">
+        SELECT  count(testid) tj,testpaper.questionscore questionscore FROM  sjstzjb LEFT JOIN testpaper
+        on sjstzjb.testpaperid=testpaper.testpaperid
+        where sjstzjb.testpaperid=#{testpaperid} ;
+    </select>
+    <select id="selectstId" resultType="com.trkj.user.vo.SjstzjbVo">
+        SELECT tquestions.tcontent,tquestions.testid FROM sjstzjb  LEFT JOIN tquestions on
+        sjstzjb.testid=tquestions.testid
+        WHERE sjstzjb.testpaperid=#{testpaperid}
+    </select>
+    <select id="selecttmxx" resultType="com.trkj.user.entity.Answers">
+        SELECT answers.optioncontent optioncontent,answers.isanswers isanswers FROM sjstzjb  LEFT JOIN tquestions on
+        sjstzjb.testid=tquestions.testid
+        LEFT JOIN answers on answers.testid=tquestions.testid
+        WHERE tquestions.testid=#{testid}
+    </select>
+    <select id="selectpd" resultType="java.lang.String">
+        select isanswers from answers where optioncontent=#{optioncontent}
+    </select>
+    <update id="updatezt">
+        update examination set kssc='考试完毕' where examinationid=#{examinationid}
+    </update>
+    <insert id="insertjl">
+        insert into record(userid,testname,highestscore,recenttime) values (#{userid},#{testname},#{highestscore},#{recenttime})
+    </insert>
+    <select id="selectmc" resultType="java.lang.String">
+        select examname from examination where examinationid=#{examinationid}
+    </select>
+    <select id="selectrecord" resultType="com.trkj.user.entity.Record">
+        SELECT user.realname,record.testname,record.recordid,record.recenttime,record.highestscore FROM record LEFT JOIN
+user on record.userid=user.userid
+WHERE record.userid=#{userid}
+ORDER BY  record.recordid DESC
+    </select>
+    <select id="selectfl" resultType="com.trkj.user.entity.Questionbank">
+        SELECT qbclassification,questionbankid from questionbank
+    </select>
+    <select id="selecttk" resultType="com.trkj.user.entity.Questionbank">
+        SELECT questionbankid,qbname,qbclassification,qbnumber,qbtime,tkzt from questionbank
+        <where>
+            <if test="qbname !=null and qbname !=''">
+                and qbname=#{qbname}
+            </if>
+            <if test="qbclassification!=null and qbclassification!=''">
+                and qbclassification=#{qbclassification}
+            </if>
+        </where>
+    </select>
+    <select id="selectcount" resultType="com.trkj.user.entity.TquestionsEntity">
+        SELECT COUNT(tqtype) con,tqtype tqtype from
+        tquestions WHERE questionbankid=#{questionbankid} GROUP BY tqtype
+    </select>
+    <select id="selectstid" resultType="com.trkj.user.entity.TquestionsEntity">
+        select testid,tcontent,tqtype from tquestions
+        <where>
+            <if test="questionbankid !=null and questionbankid !=''">
+                and questionbankid=#{questionbankid}
+            </if>
+            <if test="tqtype !=null and tqtype!='' ">
+                and tqtype=#{tqtype}
+            </if>
+        </where>
+    </select>
+    <select id="selecttjst" resultType="com.trkj.user.entity.Questionbank">
+        SELECT count(testid) coun FROM tquestions where questionbankid=#{questionbankid}
+    </select>
+    <update id="updatetkzt">
+        update questionbank set tkzt='训练完成' where questionbankid=#{questionbankid}
+    </update>
+</mapper>
